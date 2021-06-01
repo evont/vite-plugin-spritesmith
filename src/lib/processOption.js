@@ -12,10 +12,12 @@ const MINE_TYPES = {
   '.json': 'json',
   '.css': 'css',
 };
-const fThrowExpectField = (f) => { throw `Expected field "${f}" in options of SpritesmithPlugin`; };
+const fThrowExpectField = (f) => {
+  throw `Expected field "${f}" in options of SpritesmithPlugin`;
+};
 
-const extractFormatFromCSSFilename =
-    (cssFileName) => MINE_TYPES[path.parse(cssFileName).ext];
+const extractFormatFromCSSFilename = (cssFileName) =>
+  MINE_TYPES[path.parse(cssFileName).ext];
 
 const normalizeTargetCss = (mergedOptions) => {
   let css = mergedOptions.target.css;
@@ -43,7 +45,69 @@ const normalizeTargetCss = (mergedOptions) => {
   });
 };
 
-const processOptions = (rawOptions, root) => {
+const endsWith = (suffix, str) => str.slice(-suffix.length) === suffix;
+
+const splitExt = (fileName) => {
+  const extInd = fileName.lastIndexOf('.');
+  return {
+    name: fileName.slice(0, extInd),
+    ext: fileName.slice(extInd),
+  };
+};
+
+const addSuffixToFileName = (suffix, fileName, pathImpl) => {
+  const parsed = pathImpl.parse(fileName);
+  parsed.name += suffix;
+  parsed.base = parsed.name + parsed.ext;
+  return pathImpl.format(parsed);
+};
+
+const suffixToClassifier = (suffix) => (fileName) => {
+  const parsed = splitExt(fileName);
+  if (endsWith(suffix, parsed.name)) {
+    return {
+      type: 'retina',
+      retinaName: fileName,
+      normalName: parsed.name.slice(0, -suffix.length) + parsed.ext,
+    };
+  } else {
+    return {
+      type: 'normal',
+      retinaName: parsed.name + suffix + parsed.ext,
+      normalName: fileName,
+    };
+  }
+};
+
+const processRetinaOptions = (options) => {
+  if (!('retina' in options)) {
+    return;
+  }
+
+  if (typeof options.retina === 'string') {
+    const suffix = options.retina;
+    const r = (options.retina = {
+      classifier: suffixToClassifier(suffix),
+    });
+
+    r.targetImage = addSuffixToFileName(suffix, options.target.image, path);
+    r.cssImageRef = addSuffixToFileName(
+      suffix,
+      options.apiOptions.cssImageRef,
+      path.posix
+    );
+  } else {
+    options.retina.classifier || fThrowExpectField('retina.classifier');
+    options.retina.targetImage || fThrowExpectField('retina.targetImage');
+    options.retina.cssImageRef || fThrowExpectField('retina.cssImageRef');
+  }
+
+  options.target.css.forEach((css) => {
+    css[1].format += '_retina';
+  });
+};
+
+const processOptions = (rawOptions) => {
   rawOptions.src || fThrowExpectField('src');
   rawOptions.src.cwd || fThrowExpectField('src.cwd');
   rawOptions.src.glob || fThrowExpectField('src.glob');
@@ -56,7 +120,6 @@ const processOptions = (rawOptions, root) => {
       src: {
         options: {},
       },
-      logCreatedFiles: false,
       apiOptions: {
         generateSpriteName: (fileName) =>
           path.parse(path.relative(mergedOptions.src.cwd, fileName)).name,
@@ -84,7 +147,7 @@ const processOptions = (rawOptions, root) => {
     if (typeof template === 'string') {
       templater.addHandlebarsTemplate(
         templateName,
-        fs.readFileSync(path.join(root, template), 'utf-8')
+        fs.readFileSync(template, 'utf-8')
       );
     } else if (typeof template === 'function') {
       templater.addTemplate(templateName, template);
@@ -99,6 +162,8 @@ const processOptions = (rawOptions, root) => {
   Object.keys(handlebarsHelpers).forEach((helperKey) => {
     templater.registerHandlebarsHelper(helperKey, handlebarsHelpers[helperKey]);
   });
+
+  processRetinaOptions(mergedOptions);
 
   return mergedOptions;
 };

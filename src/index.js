@@ -5,24 +5,24 @@ import { createFilter } from '@rollup/pluginutils';
 import compile from './lib/compile';
 import processOptions from './lib/processOption';
 
-const handler = (customOptions, root) => {
-  const options = processOptions(customOptions, root);
+const handler = (customOptions) => {
+  const options = processOptions(customOptions);
   const { src } = options;
   const init = () => {
-    glob(path.join(root, src.cwd, src.glob), (err, files) => {
+    glob(path.join(src.cwd, src.glob), (err, files) => {
       if (err) {
         throw err;
       }
       compile(
         files,
         options,
-        root
+        'retina' in options
       );
     });
   };
   init();
   if (options.watch) {
-    gaze(src.glob, { cwd: path.join(root, src.cwd) }, (err, watcher) => {
+    gaze(src.glob, { cwd: src.cwd }, (err, watcher) => {
       watcher.on('all', init);
     });
   }
@@ -43,20 +43,14 @@ const handler = (customOptions, root) => {
 const spritesmith = (customOptions) => {
   const filter = createFilter(customOptions.include, customOptions.exclude);
   let isHandled = false;
-  let config;
-  let root;
   return {
     name: 'vite:spritesmith',
-    configResolved(resolvedConfig) {
-      config = resolvedConfig;
-      root = config.root;
-    },
     load(id) {
       if (!filter(id) || isHandled) {
         return;
       }
       isHandled = true;
-      handler(customOptions, root);
+      handler(customOptions);
     },
   };
 };

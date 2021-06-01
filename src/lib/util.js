@@ -1,4 +1,4 @@
-import mkdirpSync from 'mkdirp';
+import mkdirp from 'mkdirp';
 import fs from 'fs-extra';
 import path from 'path';
 
@@ -9,7 +9,7 @@ export const promiseCall = (fn, ...args) =>
 
 export const writeFileR = async (...args) => {
   const fileName = args[0];
-  mkdirpSync(path.dirname(fileName))
+  await mkdirp(path.dirname(fileName))
   return fs.writeFile(...args);
 };
 

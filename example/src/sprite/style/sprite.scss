@@ -1,0 +1,274 @@
+// SCSS variables are information about icon's compiled state, stored under its original file name
+//
+// .icon-home {
+//   width: $icon-home-width;
+// }
+//
+// The large array-like variables contain all information about a single icon
+// $icon-home: x y offset_x offset_y width height total_width total_height image_path;
+//
+// At the bottom of this section, we provide information about the spritesheet itself
+// $spritesheet: width height image $spritesheet-sprites;
+$ic-buy-name: 'ic-buy';
+$ic-buy-x: 0px;
+$ic-buy-y: 0px;
+$ic-buy-offset-x: 0px;
+$ic-buy-offset-y: 0px;
+$ic-buy-width: 24px;
+$ic-buy-height: 24px;
+$ic-buy-total-width: 72px;
+$ic-buy-total-height: 48px;
+$ic-buy-image: 'sprite/img/sprite.png';
+$ic-buy: (0px, 0px, 0px, 0px, 24px, 24px, 72px, 48px, 'sprite/img/sprite.png', 'ic-buy', );
+$ic-data-name: 'ic-data';
+$ic-data-x: 24px;
+$ic-data-y: 0px;
+$ic-data-offset-x: -24px;
+$ic-data-offset-y: 0px;
+$ic-data-width: 24px;
+$ic-data-height: 24px;
+$ic-data-total-width: 72px;
+$ic-data-total-height: 48px;
+$ic-data-image: 'sprite/img/sprite.png';
+$ic-data: (24px, 0px, -24px, 0px, 24px, 24px, 72px, 48px, 'sprite/img/sprite.png', 'ic-data', );
+$ic-payment-name: 'ic-payment';
+$ic-payment-x: 0px;
+$ic-payment-y: 24px;
+$ic-payment-offset-x: 0px;
+$ic-payment-offset-y: -24px;
+$ic-payment-width: 24px;
+$ic-payment-height: 24px;
+$ic-payment-total-width: 72px;
+$ic-payment-total-height: 48px;
+$ic-payment-image: 'sprite/img/sprite.png';
+$ic-payment: (0px, 24px, 0px, -24px, 24px, 24px, 72px, 48px, 'sprite/img/sprite.png', 'ic-payment', );
+$ic-safe-name: 'ic-safe';
+$ic-safe-x: 24px;
+$ic-safe-y: 24px;
+$ic-safe-offset-x: -24px;
+$ic-safe-offset-y: -24px;
+$ic-safe-width: 24px;
+$ic-safe-height: 24px;
+$ic-safe-total-width: 72px;
+$ic-safe-total-height: 48px;
+$ic-safe-image: 'sprite/img/sprite.png';
+$ic-safe: (24px, 24px, -24px, -24px, 24px, 24px, 72px, 48px, 'sprite/img/sprite.png', 'ic-safe', );
+$ic-search-name: 'ic-search';
+$ic-search-x: 48px;
+$ic-search-y: 0px;
+$ic-search-offset-x: -48px;
+$ic-search-offset-y: 0px;
+$ic-search-width: 24px;
+$ic-search-height: 24px;
+$ic-search-total-width: 72px;
+$ic-search-total-height: 48px;
+$ic-search-image: 'sprite/img/sprite.png';
+$ic-search: (48px, 0px, -48px, 0px, 24px, 24px, 72px, 48px, 'sprite/img/sprite.png', 'ic-search', );
+$ic-transition-name: 'ic-transition';
+$ic-transition-x: 48px;
+$ic-transition-y: 24px;
+$ic-transition-offset-x: -48px;
+$ic-transition-offset-y: -24px;
+$ic-transition-width: 24px;
+$ic-transition-height: 24px;
+$ic-transition-total-width: 72px;
+$ic-transition-total-height: 48px;
+$ic-transition-image: 'sprite/img/sprite.png';
+$ic-transition: (48px, 24px, -48px, -24px, 24px, 24px, 72px, 48px, 'sprite/img/sprite.png', 'ic-transition', );
+$retina-ic-buy-name: 'retina_ic-buy';
+$retina-ic-buy-x: 0px;
+$retina-ic-buy-y: 0px;
+$retina-ic-buy-offset-x: 0px;
+$retina-ic-buy-offset-y: 0px;
+$retina-ic-buy-width: 24px;
+$retina-ic-buy-height: 24px;
+$retina-ic-buy-total-width: 72px;
+$retina-ic-buy-total-height: 48px;
+$retina-ic-buy-image: 'sprite/img/sprite-retina.png';
+$retina-ic-buy: (0px, 0px, 0px, 0px, 24px, 24px, 72px, 48px, 'sprite/img/sprite-retina.png', 'retina_ic-buy', );
+$retina-ic-data-name: 'retina_ic-data';
+$retina-ic-data-x: 24px;
+$retina-ic-data-y: 0px;
+$retina-ic-data-offset-x: -24px;
+$retina-ic-data-offset-y: 0px;
+$retina-ic-data-width: 24px;
+$retina-ic-data-height: 24px;
+$retina-ic-data-total-width: 72px;
+$retina-ic-data-total-height: 48px;
+$retina-ic-data-image: 'sprite/img/sprite-retina.png';
+$retina-ic-data: (24px, 0px, -24px, 0px, 24px, 24px, 72px, 48px, 'sprite/img/sprite-retina.png', 'retina_ic-data', );
+$retina-ic-payment-name: 'retina_ic-payment';
+$retina-ic-payment-x: 0px;
+$retina-ic-payment-y: 24px;
+$retina-ic-payment-offset-x: 0px;
+$retina-ic-payment-offset-y: -24px;
+$retina-ic-payment-width: 24px;
+$retina-ic-payment-height: 24px;
+$retina-ic-payment-total-width: 72px;
+$retina-ic-payment-total-height: 48px;
+$retina-ic-payment-image: 'sprite/img/sprite-retina.png';
+$retina-ic-payment: (0px, 24px, 0px, -24px, 24px, 24px, 72px, 48px, 'sprite/img/sprite-retina.png', 'retina_ic-payment', );
+$retina-ic-safe-name: 'retina_ic-safe';
+$retina-ic-safe-x: 24px;
+$retina-ic-safe-y: 24px;
+$retina-ic-safe-offset-x: -24px;
+$retina-ic-safe-offset-y: -24px;
+$retina-ic-safe-width: 24px;
+$retina-ic-safe-height: 24px;
+$retina-ic-safe-total-width: 72px;
+$retina-ic-safe-total-height: 48px;
+$retina-ic-safe-image: 'sprite/img/sprite-retina.png';
+$retina-ic-safe: (24px, 24px, -24px, -24px, 24px, 24px, 72px, 48px, 'sprite/img/sprite-retina.png', 'retina_ic-safe', );
+$retina-ic-search-name: 'retina_ic-search';
+$retina-ic-search-x: 48px;
+$retina-ic-search-y: 0px;
+$retina-ic-search-offset-x: -48px;
+$retina-ic-search-offset-y: 0px;
+$retina-ic-search-width: 24px;
+$retina-ic-search-height: 24px;
+$retina-ic-search-total-width: 72px;
+$retina-ic-search-total-height: 48px;
+$retina-ic-search-image: 'sprite/img/sprite-retina.png';
+$retina-ic-search: (48px, 0px, -48px, 0px, 24px, 24px, 72px, 48px, 'sprite/img/sprite-retina.png', 'retina_ic-search', );
+$retina-ic-transition-name: 'retina_ic-transition';
+$retina-ic-transition-x: 48px;
+$retina-ic-transition-y: 24px;
+$retina-ic-transition-offset-x: -48px;
+$retina-ic-transition-offset-y: -24px;
+$retina-ic-transition-width: 24px;
+$retina-ic-transition-height: 24px;
+$retina-ic-transition-total-width: 72px;
+$retina-ic-transition-total-height: 48px;
+$retina-ic-transition-image: 'sprite/img/sprite-retina.png';
+$retina-ic-transition: (48px, 24px, -48px, -24px, 24px, 24px, 72px, 48px, 'sprite/img/sprite-retina.png', 'retina_ic-transition', );
+$spritesheet-width: 72px;
+$spritesheet-height: 48px;
+$spritesheet-image: 'sprite/img/sprite.png';
+$spritesheet-sprites: ($ic-buy, $ic-data, $ic-payment, $ic-safe, $ic-search, $ic-transition, );
+$spritesheet: (72px, 48px, 'sprite/img/sprite.png', $spritesheet-sprites, );
+$vi-retina-width: 72px;
+$vi-retina-height: 48px;
+$vi-retina-image: 'sprite/img/sprite-retina.png';
+$vi-retina-sprites: ($retina-ic-buy, $retina-ic-data, $retina-ic-payment, $retina-ic-safe, $retina-ic-search, $retina-ic-transition, );
+$vi-retina: (72px, 48px, 'sprite/img/sprite-retina.png', $vi-retina-sprites, );
+
+// These "retina group" variables are mappings for the naming and pairing of normal and retina sprites.
+//
+// The list formatted variables are intended for mixins like `retina-sprite` and `retina-sprites`.
+$ic-buy-group-name: 'ic-buy';
+$ic-buy-group: ('ic-buy', $ic-buy, $retina-ic-buy, );
+$ic-data-group-name: 'ic-data';
+$ic-data-group: ('ic-data', $ic-data, $retina-ic-data, );
+$ic-payment-group-name: 'ic-payment';
+$ic-payment-group: ('ic-payment', $ic-payment, $retina-ic-payment, );
+$ic-safe-group-name: 'ic-safe';
+$ic-safe-group: ('ic-safe', $ic-safe, $retina-ic-safe, );
+$ic-search-group-name: 'ic-search';
+$ic-search-group: ('ic-search', $ic-search, $retina-ic-search, );
+$ic-transition-group-name: 'ic-transition';
+$ic-transition-group: ('ic-transition', $ic-transition, $retina-ic-transition, );
+$retina-groups: ($ic-buy-group, $ic-data-group, $ic-payment-group, $ic-safe-group, $ic-search-group, $ic-transition-group, );
+
+// The provided mixins are intended to be used with the array-like variables
+//
+// .icon-home {
+//   @include sprite-width($icon-home);
+// }
+//
+// .icon-email {
+//   @include sprite($icon-email);
+// }
+//
+// Example usage in HTML:
+//
+// `display: block` sprite:
+// <div class="icon-home"></div>
+//
+// To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
+//
+// // CSS
+// .icon {
+//   display: inline-block;
+// }
+//
+// // HTML
+// <i class="icon icon-home"></i>
+@mixin sprite-width($sprite) {
+  width: nth($sprite, 5);
+}
+
+@mixin sprite-height($sprite) {
+  height: nth($sprite, 6);
+}
+
+@mixin sprite-position($sprite) {
+  $sprite-offset-x: nth($sprite, 3);
+  $sprite-offset-y: nth($sprite, 4);
+  background-position: $sprite-offset-x  $sprite-offset-y;
+}
+
+@mixin sprite-image($sprite) {
+  $sprite-image: nth($sprite, 9);
+  background-image: url(#{$sprite-image});
+}
+
+@mixin sprite($sprite) {
+  @include sprite-image($sprite);
+  @include sprite-position($sprite);
+  @include sprite-width($sprite);
+  @include sprite-height($sprite);
+}
+
+// The `retina-sprite` mixin sets up rules and a media query for a sprite/retina sprite.
+//   It should be used with a "retina group" variable.
+//
+// The media query is from CSS Tricks: https://css-tricks.com/snippets/css/retina-display-media-query/
+//
+// $icon-home-group: ('icon-home', $icon-home, $icon-home-2x, );
+//
+// .icon-home {
+//   @include retina-sprite($icon-home-group);
+// }
+@mixin sprite-background-size($sprite) {
+  $sprite-total-width: nth($sprite, 7);
+  $sprite-total-height: nth($sprite, 8);
+  background-size: $sprite-total-width $sprite-total-height;
+}
+
+@mixin retina-sprite($retina-group) {
+  $normal-sprite: nth($retina-group, 2);
+  $retina-sprite: nth($retina-group, 3);
+  @include sprite($normal-sprite);
+
+  @media (-webkit-min-device-pixel-ratio: 2),
+         (min-resolution: 192dpi) {
+    @include sprite-image($retina-sprite);
+    @include sprite-background-size($normal-sprite);
+  }
+}
+
+// The `sprites` mixin generates identical output to the CSS template
+//   but can be overridden inside of SCSS
+//
+// @include sprites($spritesheet-sprites);
+@mixin sprites($sprites) {
+  @each $sprite in $sprites {
+    $sprite-name: nth($sprite, 10);
+    .#{$sprite-name} {
+      @include sprite($sprite);
+    }
+  }
+}
+
+// The `retina-sprites` mixin generates a CSS rule and media query for retina groups
+//   This yields the same output as CSS retina template but can be overridden in SCSS
+//
+// @include retina-sprites($retina-groups);
+@mixin retina-sprites($retina-groups) {
+  @each $retina-group in $retina-groups {
+    $sprite-name: nth($retina-group, 1);
+    .#{$sprite-name} {
+      @include retina-sprite($retina-group);
+    }
+  }
+}
