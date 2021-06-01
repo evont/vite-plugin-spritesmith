@@ -1,0 +1,122 @@
+{
+// Default options
+'functions': true,
+'variableNameTransforms': ['dasherize']
+}
+
+{{#extend "scss"}}
+
+{{#content "sprites"}}
+{{!-- {{#each sprites}}
+${{spritesheet_info.strings.name}}{{strings.name_name}}: '{{name}}';
+${{spritesheet_info.strings.name}}{{strings.name_x}}: {{px.x}};
+${{spritesheet_info.strings.name}}{{strings.name_y}}: {{px.y}};
+${{spritesheet_info.strings.name}}{{strings.name_offset_x}}: {{px.offset_x}};
+${{spritesheet_info.strings.name}}{{strings.name_offset_y}}: {{px.offset_y}};
+${{spritesheet_info.strings.name}}{{strings.name_width}}: {{px.width}};
+${{spritesheet_info.strings.name}}{{strings.name_height}}: {{px.height}};
+${{spritesheet_info.strings.name}}{{strings.name_total_width}}: {{px.total_width}};
+${{spritesheet_info.strings.name}}{{strings.name_total_height}}: {{px.total_height}};
+${{spritesheet_info.strings.name}}{{strings.name_image}}: '{{{escaped_image}}}';
+${{spritesheet_info.strings.name}}{{strings.name}}: ({{px.x}}, {{px.y}}, {{px.offset_x}}, {{px.offset_y}}, {{px.width}}, {{px.height}}, {{px.total_width}}, {{px.total_height}}, '{{{escaped_image}}}', '{{name}}', );
+{{/each}} --}}
+{{/content}}
+
+{{#content "spritesheet"}}
+{{#each sprites}}
+${{strings.name}}: '{{strings.name}}';
+${{../spritesheet_info.strings.name}}-{{strings.name_name}}: '{{name}}';
+${{../spritesheet_info.strings.name}}-{{strings.name_x}}: {{px.x}};
+${{../spritesheet_info.strings.name}}-{{strings.name_y}}: {{px.y}};
+${{../spritesheet_info.strings.name}}-{{strings.name_offset_x}}: {{px.offset_x}};
+${{../spritesheet_info.strings.name}}-{{strings.name_offset_y}}: {{px.offset_y}};
+${{../spritesheet_info.strings.name}}-{{strings.name_width}}: {{px.width}};
+${{../spritesheet_info.strings.name}}-{{strings.name_height}}: {{px.height}};
+${{../spritesheet_info.strings.name}}-{{strings.name_total_width}}: {{px.total_width}};
+${{../spritesheet_info.strings.name}}-{{strings.name_total_height}}: {{px.total_height}};
+${{../spritesheet_info.strings.name}}-{{strings.name_image}}: '{{{escaped_image}}}';
+${{../spritesheet_info.strings.name}}-{{strings.name}}: ({{px.x}}, {{px.y}}, {{px.offset_x}}, {{px.offset_y}}, {{px.width}}, {{px.height}}, {{px.total_width}}, {{px.total_height}}, '{{{escaped_image}}}', '{{name}}', );
+
+{{/each}}
+${{spritesheet_info.strings.name_width}}: {{spritesheet.px.width}};
+${{spritesheet_info.strings.name_height}}: {{spritesheet.px.height}};
+${{spritesheet_info.strings.name_image}}: '{{{spritesheet.escaped_image}}}';
+${{spritesheet_info.strings.name_sprites}}: ({{#each sprites}}${{../spritesheet_info.strings.name}}-{{strings.name}}, {{/each}});
+
+${{spritesheet_info.strings.name}}: ({{spritesheet.px.width}}, {{spritesheet.px.height}}, '{{{spritesheet.escaped_image}}}', ${{spritesheet_info.strings.name_sprites}}, );
+
+${{spritesheet_info.strings.name}}-map: (
+  {{#each sprites}}
+    {{strings.name}}: ${{../spritesheet_info.strings.name}}-{{strings.name}},
+  {{/each}}
+);
+{{/content}}
+
+{{#content "sprite-functions"}}
+@function {{spritesheet_info.name}}-getwidth($sprite, $rate: 1) {
+  $real-sprite:  map-get(${{spritesheet_info.strings.name}}-map, $sprite);
+  @return nth($real-sprite, 5) * $rate;
+}
+
+@function {{spritesheet_info.name}}-getheight($sprite, $rate: 1) {
+  $real-sprite:  map-get(${{spritesheet_info.strings.name}}-map, $sprite);
+  @return nth($real-sprite, 6) * $rate;
+}
+
+@mixin {{spritesheet_info.name}}-sprite-width($sprite, $rate: 1, $size: null) {
+  @if ($size == null){
+    $size: {{spritesheet_info.name}}-getwidth($sprite, $rate);
+  }
+  width: $size;
+}
+
+@mixin {{spritesheet_info.name}}-sprite-height($sprite, $rate: 1, $size: null) {
+  @if ($size == null){
+    $size: {{spritesheet_info.name}}-getheight($sprite, $rate);
+  }
+  height: $size;
+}
+
+@mixin {{spritesheet_info.name}}-sprite-position($sprite, $rate: 1, $size: null) {
+  @if ($rate == 1 and $size != null){
+    $rate: $size / {{spritesheet_info.name}}-getwidth($sprite);
+  }
+  $real-sprite: map-get(${{spritesheet_info.strings.name}}-map, $sprite);
+  $sprite-offset-x: nth($real-sprite, 3);
+  $sprite-offset-y: nth($real-sprite, 4);
+  background-position: $sprite-offset-x * $rate $sprite-offset-y * $rate;
+}
+
+@mixin {{spritesheet_info.name}}-sprite-image() {
+  background-image: url({{{spritesheet.escaped_image}}});
+}
+
+@mixin {{spritesheet_info.name}}-sprite-size($sprite, $rate: 1, $size: null) {
+  @if ($rate == 1 and $size != null){
+    $rate: $size / {{spritesheet_info.name}}-getwidth($sprite);
+  }
+  background-size: ${{spritesheet_info.name}}-width * $rate ${{spritesheet_info.name}}-height * $rate;
+}
+
+@mixin {{spritesheet_info.name}}-sprite($sprite, $rate: 1, $size: null) {
+  {{!-- @debug $sprite;
+  $real-sprite: map-get(${{spritesheet_info.strings.name}}-map, $sprite);
+  @debug $real-sprite; --}}
+  @include {{spritesheet_info.name}}-sprite-image();
+  @include {{spritesheet_info.name}}-sprite-position($sprite, $rate, $size);
+  @include {{spritesheet_info.name}}-sprite-width($sprite, $rate, $size);
+  @include {{spritesheet_info.name}}-sprite-height($sprite, $rate, $size);
+  @include {{spritesheet_info.name}}-sprite-size($sprite, $rate, $size);
+}
+{{/content}}
+{{#content "spritesheet-functions"}}
+@mixin sprites($sprites) {
+  @each $sprite in $sprites {
+    $sprite-name: nth($sprite, 10);
+    .#{$sprite-name} {
+      @include {{spritesheet_info.name}}-sprite($sprite-name);
+    }
+  }
+}
+{{/content}}
+{{/extend}}
