@@ -46,7 +46,7 @@ const spritesmith = (customOptions) => {
   let config;
   let root;
   return {
-    name: '@rollup/spritesmith',
+    name: 'vite:spritesmith',
     configResolved(resolvedConfig) {
       config = resolvedConfig;
       root = config.root;

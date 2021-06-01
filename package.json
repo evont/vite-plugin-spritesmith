@@ -1,7 +1,7 @@
 {
-  "name": "@rollup/plugin-spritesmith",
+  "name": "vite-plugin-spritesmith",
   "version": "0.0.1",
-  "description": "Rollup plugin that converts set of images into sprites",
+  "description": "vite plugin that converts set of images into sprites",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "scripts": {
