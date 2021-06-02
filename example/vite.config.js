@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
+// import Spritesmith from 'vite-plugin-spritesmith';
 import Spritesmith from '../';
 import path from 'path';
 import del from 'del';
@@ -15,7 +16,6 @@ export default defineConfig({
   plugins: [
     vue(),
     Spritesmith({
-      watch: true,
       src: {
         cwd: resolve('./src/assets/sprites'),
         glob: '*.png',

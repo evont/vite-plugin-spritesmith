@@ -1,7 +1,6 @@
 import glob from 'glob';
 import gaze from 'gaze';
 import path from 'path';
-import { createFilter } from '@rollup/pluginutils';
 import compile from './lib/compile';
 import processOptions from './lib/processOption';
 
@@ -41,15 +40,9 @@ const handler = (customOptions) => {
  * @returns
  */
 const spritesmith = (customOptions) => {
-  const filter = createFilter(customOptions.include, customOptions.exclude);
-  let isHandled = false;
   return {
     name: 'vite:spritesmith',
-    load(id) {
-      if (!filter(id) || isHandled) {
-        return;
-      }
-      isHandled = true;
+    buildStart() {
       handler(customOptions);
     },
   };

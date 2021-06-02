@@ -75,7 +75,6 @@ function getSpritesForSpritesheetTemplates(
 
 const compileRetina = async (files, options) => {
   const { src, target, retina, apiOptions, spritesmithOptions } = options;
-  // const { target } = options;
   const sourceRecords = files.map((fileName) => {
     const oneRecord = retina.classifier(path.resolve(src.cwd, fileName));
     return {

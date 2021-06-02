@@ -1,9 +1,21 @@
-A rollup plugin that converts a set of images into a spritesheet and SASS/LESS/Stylus mixins, using
+# vite-plugin-spritesmith ![npm](https://img.shields.io/npm/v/vite-plugin-spritesmith)
+
+[![NPM](https://nodei.co/npm/vite-plugin-spritesmith.png)](https://nodei.co/npm/vite-plugin-spritesmith/)
+
+A Vite plugin that converts a set of images into a spritesheet and SASS/LESS/Stylus mixins, using
 [spritesmith](https://github.com/Ensighten/spritesmith) and [spritesheet-templates](https://github.com/twolfson/spritesheet-templates)
 
-All ideas are shamelessly taken from [webpack-spritesmith](https://github.com/mixtur/webpack-spritesmith).
+## Install
 
-### Example
+```bash
+# use yarn (recommend)
+yarn add -D vite-plugin-spritesmith
+# or use npm
+npm install --save-dev vite-plugin-spritesmith
+```
+
+
+## Example
 
 Let's say you have the following folder structure
 
@@ -26,11 +38,9 @@ Then you need to instantiate the plugin in the vite config like this:
 
 ```javascript
 import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
 import Spritesmith from '@vitejs/plugin-spritesmith';
 export default defineConfig({
   plugins: [
-    vue(),
     Spritesmith({
       watch: true,
       src: {
@@ -38,7 +48,7 @@ export default defineConfig({
         glob: '*.png',
       },
       target: {
-        image: './src/assets/target/sprite.png',
+        image: './src/assets/target/spri·te.png',
         css: [
           [
             './src/assets/style/sprite.scss',
@@ -68,26 +78,25 @@ And then just use it
 ```scss
 @import './assets/style/sprite.scss';
 .icon {
-  @include sprites($vite1-sprites);
+  @include sprites($spritesheet-sprites);
 }
 ```
 
 So the way generated image is accessed from the generated API now must be specified manually.
 
-### Config
-
+## Config
+- `watch` - should watch source images change or not, default `true`
 - `src` - used to build a list of source images
 
   - `cwd` should be the closest common directory for all source images;
-  - `glob` well... it is a glob
-  - `options` - optional. These options are passed down to the packages that handle the globbing of images. (We use [gaze](https://github.com/shama/gaze), which passes them down to [globule](https://github.com/cowboy/node-globule), which also passes them down to [node-glob](https://github.com/isaacs/node-glob#options).)
+  - `glob` path pattern of source images 
 
   `cwd` and `glob` both will be passed directly to [glob](https://github.com/isaacs/node-glob) (and [gaze](https://github.com/shama/gaze)
   in watch mode), then the resulting list of files will be used as a list of source images
 
 - `target` - generated files
 
-  - `image` - the target image's filename. Can be interpolated with [loader-utils](https://github.com/webpack/loader-utils#interpolatename). I would recommend to use file-loader for interpolation though.
+  - `image` - the target image's filename.
   - `css` - can be one of the following
 
     - `"full/path/to/spritesheet/api"` - for example `path.resolve(__dirname, 'src/spritesmith-generated/sprite.styl')`
@@ -144,6 +153,6 @@ So the way generated image is accessed from the generated API now must be specif
 
   You can use templates registered here as `format` in "target.css"
 
-  ```
+## License
 
-  ```
+MIT
