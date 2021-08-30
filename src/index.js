@@ -6,7 +6,7 @@ import processOptions from './lib/processOption';
 
 const handler = (customOptions) => {
   const options = processOptions(customOptions);
-  const { src } = options;
+  const { src, watch } = options;
   const init = () => {
     glob(path.join(src.cwd, src.glob), (err, files) => {
       if (err) {
@@ -20,7 +20,7 @@ const handler = (customOptions) => {
     });
   };
   init();
-  if (options.watch) {
+  if (watch) {
     gaze(src.glob, { cwd: src.cwd }, (err, watcher) => {
       watcher.on('all', init);
     });

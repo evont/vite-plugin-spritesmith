@@ -10,12 +10,12 @@ const spriteConfig = {
   scssTarget: resolve('src/sprite/style/')
 };
 del.sync([spriteConfig.imgTarget, spriteConfig.scssTarget]);
-
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
     Spritesmith({
+      watch: process.env.NODE_ENV !== 'production',
       src: {
         cwd: resolve('./src/assets/sprites'),
         glob: '*.png',

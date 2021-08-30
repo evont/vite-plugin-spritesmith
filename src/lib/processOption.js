@@ -117,7 +117,7 @@ const processOptions = (rawOptions) => {
 
   const mergedOptions = _.merge(
     {
-      watch: true,
+      watch: false,
       src: {
         options: {},
       },

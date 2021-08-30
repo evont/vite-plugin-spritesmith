@@ -85,7 +85,7 @@ And then just use it
 So the way generated image is accessed from the generated API now must be specified manually.
 
 ## Config
-- `watch` - should watch source images change or not, default `true`
+- `watch` - should watch source images change or not, default `false`
 - `src` - used to build a list of source images
 
   - `cwd` should be the closest common directory for all source images;
